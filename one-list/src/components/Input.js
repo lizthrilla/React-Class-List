@@ -5,12 +5,11 @@ class Input extends Component {
     return (
       <div>
         <h1>Form Input</h1>
-        <form>
+        <form onSubmit={this.props.submitForm}>
           <input
             type="text"
             placeholder="We will make this pretty later"
             inputsubmitted={this.props.inputsubmitted}
-            onClick={console.log(this.props.inputsubmitted)}
             onChange={this.props.handleChange}
           />
         </form>
