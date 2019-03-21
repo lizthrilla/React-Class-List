@@ -1,8 +1,7 @@
-import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
-import Input from "./components/Input"
-import List from "./components/List"
+import React, { Component } from 'react'
+import './App.css'
+// import Input from './components/Input'
+import ListItem from './components/ListItem'
 
 // Liz64EncodedReactClass
 
@@ -10,25 +9,44 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      inputsubmitted: "something",
-      impendingList: ["thing1","2","last one"]
+      inputsubmitted: '',
+      impendingList: ['thing1', '2', 'last one']
     }
   }
 
-  submitForm = (event) => {
-    console.log(event.target.value)
-    this.setState({ impendingList: this.state.impendingList.concat({inputsubmitted: this.state.inputsubmitted}) })
+  submitForm = event => {
+    event.preventDefault()
+    this.setState({
+      inputsubmitted: event.target.value
+    })
+    console.log(this.state.inputsubmitted + 'here')
+    const newImpendingList = this.state.impendingList.concat(
+      this.state.inputsubmitted
+    )
+    this.setState({
+      impendingList: newImpendingList
+    })
+    console.log(this.state.impendingList)
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({ inputsubmitted: event.target.value })
-    console.log(event.target.value)
+    console.log(this.state.inputsubmitted)
   }
   render() {
     return (
       <div className="App">
-        <List impendingList={this.state.impendingList} submitForm={this.submitForm}/>
-        <Input inputsubmitted={this.state.inputsubmitted} handleChange={this.handleChange} />
+        <ul>
+          <ListItem inputsubmitted={this.state.inputsubmitted} />
+        </ul>
+        <form onSubmit={this.submitForm}>
+          <input
+            type="text"
+            placeholder="We will make this pretty later"
+            inputsubmitted={this.state.inputsubmitted}
+            onChange={this.handleChange}
+          />
+        </form>
       </div>
     )
   }
