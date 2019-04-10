@@ -34,12 +34,14 @@ class App extends Component {
     console.log(this.state.inputsubmitted)
   }
   render() {
-    const items = this.state.impendingList.map((item, i) => <li>{item}</li> )
+    const items = this.state.impendingList.map((item) => {
+      return <ListItem inputsubmitted={item} />
+    })
+
     return (
       <div className="App">
         <ul>
           {items}
-          <ListItem inputsubmitted={this.state.inputsubmitted} />
         </ul>
         <form onSubmit={this.submitForm}>
           <input
